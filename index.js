@@ -161,7 +161,7 @@ function getDirection(feed) {
 var speedSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     width: "container",
-    height: 200,
+    height: 300,
     autosize: { type: "fit", resize: true},
     data: {
       name: "fetched",
@@ -178,9 +178,6 @@ var speedSpec = {
           y: {
             field: 'field4', 
             type: 'quantitative', 
-            axis: {
-              title: 'Gusts'
-            }
           },
         }
       },
@@ -194,9 +191,6 @@ var speedSpec = {
           y: {
             field: 'field5', 
             type: 'quantitative', 
-            axis: {
-              title: 'Avg. wind m/s'
-            }
           },
         }
       }
@@ -207,7 +201,19 @@ var speedSpec = {
         type: 'temporal',
         timeUnit: 'dayshoursminutes',
         axis: {
-          title: 'Local Time'
+          title: 'Local Time',
+          titleFontSize: 15,
+          labelFontSize: 18
+        }
+      },
+      y: {
+        axis: {
+          format: ".1f",
+          title: 'Avg. wind & Gust m/s',
+          titleFontSize: 15,
+          labelFontSize: 18
+        },
+        scale: {
         }
       }
     }
@@ -216,22 +222,24 @@ var speedSpec = {
   var directionSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     width: "container",
-    height: 200,
+    height: 300,
     autosize: { type: "fit", resize: true},
     data: {
       name: "fetched",
       values: []
     },
-    mark: {type: "point", filled: true, size: 8, color: "red"},
+    mark: {type: "point", filled: true, size: 30, color: "red"},
     encoding: {
       y: {
         field: 'field6', 
-        type: 'quantitative', 
+        type: 'quantitative',
         scale: {
-          domain: [0, 360]
+          domain: [0, 360],
         },
         axis: {
-          title: 'Wind Direction'
+          title: 'Wind Direction',
+          titleFontSize: 15,
+          labelFontSize: 18
         }
       },
       x: {
@@ -239,7 +247,9 @@ var speedSpec = {
         type: 'temporal',
         timeUnit: 'dayshoursminutes',
         axis: {
-          title: 'Local Time'
+          title: 'Local Time',
+          titleFontSize: 15,
+          labelFontSize: 18
         }
       }
     }
@@ -248,7 +258,7 @@ var speedSpec = {
   var tempSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     width: "container",
-    height: 200,
+    height: 300,
     autosize: { type: "fit", resize: true},
     data: {
       name: "fetched",
@@ -260,7 +270,9 @@ var speedSpec = {
         field: 'field1', 
         type: 'quantitative', 
         axis: {
-          title: 'Temperature \u{2103}'
+          title: 'Temperature \u{2103}',
+          titleFontSize: 15,
+          labelFontSize: 18
         }
       },
       x: {
@@ -268,7 +280,9 @@ var speedSpec = {
         type: 'temporal',
         timeUnit: 'dayshoursminutes',
         axis: {
-          title: 'Local Time'
+          title: 'Local Time',
+          titleFontSize: 15,
+          labelFontSize: 18
         }
       }
     }    
