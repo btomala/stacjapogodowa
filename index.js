@@ -1,20 +1,30 @@
-function update(){
-    const data = fetchData()
+const channel = 951169;
+let last_entry_id;
+
+function start(enforced) {
     const speed = vegaEmbed('#speedChart', speedSpec, {actions: false})
     const direction = vegaEmbed('#directionChart', directionSpec, {actions: false});
     const temp = vegaEmbed('#tempChart', tempSpec, {actions: false});
+    update(speed, direction, temp, 100, enforced);
+}
+function update(speed, direction, temp, n, enforced){
+    const data = fetchThingspeakData(channel, n);
     Promise.all([data, speed, direction, temp])
     .then((res) => {
-        res[1].view
+        console.log(`${last_entry_id}:${res[0].channel.last_entry_id}`);
+        if(enforced || last_entry_id != res[0].channel.last_entry_id) {
+          last_entry_id = res[0].channel.last_entry_id;
+          res[1].view
             .insert('fetched', res[0].feeds)
-            .run();
-            res[2].view
+            .runAsync();
+          res[2].view
             .insert('fetched', res[0].feeds)
-            .run();
-            res[3].view
+            .runAsync();
+          res[3].view
             .insert('fetched', res[0].feeds)
-            .run();
+            .runAsync();
         }
+      }
     );
 
     data.then ( resp => {
@@ -28,11 +38,11 @@ function update(){
     }).catch( err => {
         const text = document.getElementById("updated");
         text.style.fill = "red";
-    }).finally(() => setTimeout(update, 60*1000));
+    }).finally(() => setTimeout(() => update(speed, direction, temp, 1), 60*1000));
 }
   
-async function fetchData() {
-    const response = await fetch("https://api.thingspeak.com/channels/951169/feeds.json?results=100&timezone=Europe/Warsaw");
+async function fetchThingspeakData(id, n) {
+    const response = await fetch(`https://api.thingspeak.com/channels/${id}/feeds.json?results=${n}&timezone=Europe/Warsaw`);
     const data = await response.json();
     return data;
 }

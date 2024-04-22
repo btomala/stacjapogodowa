@@ -9,7 +9,7 @@
       <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.24.0"></script>
       <script src="index.js"></script>
       </head>
-<body onload="update();">
+<body onload="start(false);">
 
 <h2>Skrzetla</h2>
 
@@ -46,7 +46,7 @@
       <circle class="inner" stroke="green" mask="url(#green)"/>
       <circle class="dot"/>
       <polygon id="arrow" points="200,160 185,120 200,130 215,120" transform="rotate(30 200,200)" />
-      <text id="updated" class="text"  x="80%" y="50" fill="red" onclick="update()">&#x27F3 ?:?</text>
+      <text id="updated" class="text"  x="80%" y="50" fill="red" onclick="start(true)">&#x27F3 ?:?</text>
       <text class="text" x="50%" y="8%" >N</text>
       <text class="text" x="50%" y="93%">S</text>
       <text class="text" x="7%" y="50%" >W</text>
