@@ -1,3 +1,6 @@
+:root {
+    --size: 400px;
+}
 h2 {
     text-align: center;
 }
@@ -54,7 +57,7 @@ h2 {
 }
 
 .boxes {
-    max-width: 400px;
+    max-width: var(--size);
     background-color: black;
     color: white;
     font-size: 15px;
@@ -85,13 +88,14 @@ h2 {
 }
 .windrose {
     display: inline-block;
-    width: 400px;
+    width: var(--size);
+    height: var(--size);
     vertical-align: top;
 }
 .charts {
     display: inline-block;
-    width: 400px;
-    @media screen and (min-width: 810px) {
-        width: calc(100% - 410px);        
+    width: var(--size);
+    @media screen and (min-width: calc((var(--size) * 2)+10)) {
+        width: calc(100% - var(--size)-10);        
     }
 }
