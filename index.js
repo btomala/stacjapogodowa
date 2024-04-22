@@ -154,7 +154,7 @@ var speedSpec = {
             field: 'field4', 
             type: 'quantitative', 
             axis: {
-              title: 'Siła wiatru m/s'
+              title: 'Gusts'
             }
           },
         }
@@ -170,7 +170,7 @@ var speedSpec = {
             field: 'field5', 
             type: 'quantitative', 
             axis: {
-              title: 'Siła wiatru m/s'
+              title: 'Avg. wind m/s'
             }
           },
         }
@@ -180,8 +180,9 @@ var speedSpec = {
       x: {
         field: 'created_at',
         type: 'temporal',
+        timeUnit: 'dayshoursminutes',
         axis: {
-          title: 'Czas'
+          title: 'Local Time'
         }
       }
     }
@@ -196,7 +197,7 @@ var speedSpec = {
       name: "fetched",
       values: []
     },
-    mark: {type: "point", filled: true, size: 5},
+    mark: {type: "point", filled: true, size: 8, color: "red"},
     encoding: {
       y: {
         field: 'field6', 
@@ -205,14 +206,15 @@ var speedSpec = {
           domain: [0, 360]
         },
         axis: {
-          title: 'Kierunek'
+          title: 'Wind Direction'
         }
       },
       x: {
         field: 'created_at',
         type: 'temporal',
+        timeUnit: 'dayshoursminutes',
         axis: {
-          title: 'Czas'
+          title: 'Local Time'
         }
       }
     }
@@ -233,16 +235,17 @@ var speedSpec = {
         field: 'field1', 
         type: 'quantitative', 
         axis: {
-          title: 'Temperatura \u{2103}'
+          title: 'Temperature \u{2103}'
         }
       },
       x: {
         field: 'created_at',
         type: 'temporal',
+        timeUnit: 'dayshoursminutes',
         axis: {
-          title: 'Czas'
+          title: 'Local Time'
         }
       }
-    }
+    }    
   };
 
