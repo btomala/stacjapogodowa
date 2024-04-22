@@ -1,10 +1,18 @@
 const channel = 951169;
+const possible_from = 10;
+const possible_to = 70;
+const recommended_from = 30;
+const recommended_to = 50;
+const circuit = 140 * 2 * 3.14
+
 let last_entry_id;
 
 function start(enforced) {
     const speed = vegaEmbed('#speedChart', speedSpec, {actions: false})
     const direction = vegaEmbed('#directionChart', directionSpec, {actions: false});
     const temp = vegaEmbed('#tempChart', tempSpec, {actions: false});
+    setRecommended();
+    setPossible();
     update(speed, direction, temp, 100, enforced);
 }
 function update(speed, direction, temp, n, enforced){
@@ -45,6 +53,22 @@ async function fetchThingspeakData(id, n) {
     const response = await fetch(`https://api.thingspeak.com/channels/${id}/feeds.json?results=${n}&timezone=Europe/Warsaw`);
     const data = await response.json();
     return data;
+}
+
+function setRecommended() {
+    const recommended = document.getElementById("recommended")
+    const range = circuit * (recommended_to - recommended_from) / 360;
+    const shift = -90 + recommended_from;
+    recommended.setAttribute("stroke-dasharray",`${range} ${circuit}`)
+    recommended.setAttribute("transform",`rotate(${shift} 200,200)`);
+}
+
+function setPossible() {
+  const possible = document.getElementById("possible")
+  const range = circuit * (possible_to - possible_from) / 360;
+  const shift = -90 + possible_from;
+  possible.setAttribute("stroke-dasharray",`${range} ${circuit}`)
+  possible.setAttribute("transform",`rotate(${shift} 200,200)`);
 }
 
 function dateToTime(updated) {
@@ -109,9 +133,10 @@ function getSpeedColor(speed) {
 }
 
 function getDirectionColor(direction) {
-    if (direction > 350) return "yellow";
-    else if (direction < 20) return "yellow";
-    else if (direction < 100) return "green";
+    if (direction < possible_from) return "black";
+    if (direction < recommended_from) return "yellow";
+    else if (direction < recommended_to) return "green";
+    else if (direction < possible_to) return "yellow";
     else return "black";
 }
 function getTemperatureColor(temp) {
@@ -136,7 +161,7 @@ function getDirection(feed) {
 var speedSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     width: "container",
-    height: 150,
+    height: 200,
     autosize: { type: "fit", resize: true},
     data: {
       name: "fetched",
@@ -191,7 +216,7 @@ var speedSpec = {
   var directionSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     width: "container",
-    height: 150,
+    height: 200,
     autosize: { type: "fit", resize: true},
     data: {
       name: "fetched",
@@ -223,7 +248,7 @@ var speedSpec = {
   var tempSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     width: "container",
-    height: 150,
+    height: 200,
     autosize: { type: "fit", resize: true},
     data: {
       name: "fetched",

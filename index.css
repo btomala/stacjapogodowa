@@ -1,23 +1,11 @@
 :root {
-    --size: 400px;
+    --size: 600px;
 }
-h2 {
+h1 {
     text-align: center;
 }
-.mask_white_stripes {
-    x: calc(50% - 2px);
-    y: 0;
-    height: 100%;
-    width: 4px;
-    fill: black;
-  }
-
-.mask_drection {
-    x: 50%;
-    y: 50%;
-    height: 50%;
-    width: 50%;
-    fill: black;
+#updated{
+    cursor: pointer;
 }
 
 .text {
@@ -26,38 +14,32 @@ h2 {
     text-align: middle;
     font-weight: bold;
 }
-#updated{
-    cursor: pointer;
-}
 .outer {
     cx:50%;
     cy:50%;
-    r:150;
-    fill:white;
+    r:150px;
+    fill:#eee;
     stroke-width: 12px;
     stroke:black;
 }
 .inner {
     cx:50%;
     cy:50%;
-    r:140;
-    fill:white;
+    r:140px;
+    fill:transparent;
     stroke-width: 15px;
 }
 .dot {
     cx:50%;
     cy:50%;
-    r:10;
+    r:10px;
     fill: black;
 }
 #arrow {
-    fill: green;
-    stroke:black;
     stroke-width:2px;
 }
 
 .boxes {
-    max-width: var(--size);
     background-color: black;
     color: white;
     font-size: 15px;
@@ -87,15 +69,15 @@ h2 {
     width: 100%;
 }
 .windrose {
-    display: inline-block;
-    width: var(--size);
-    height: var(--size);
     vertical-align: top;
+    @media screen and (min-width: 1200px) {
+        display: inline-block;
+        width: var(--size);        
+    }
 }
 .charts {
+    @media screen and (min-width: 1200px) {
     display: inline-block;
-    width: var(--size);
-    @media screen and (min-width: calc((var(--size) * 2)+10)) {
-        width: calc(100% - var(--size)-10);        
+    width: calc( 100% - var(--size) - 10px);        
     }
 }
