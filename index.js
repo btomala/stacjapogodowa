@@ -112,7 +112,6 @@ function setArrow(channel, latest) {
     const direction = getDirection(latest);
     const speed = getSpeed(latest);
     arrow.style.fill = getSpeedColor(speed);
-    arrow.style.stroke = getDirectionColor(channel, direction);
     arrow.setAttribute("transform", `rotate(${direction} 200,200)`);    
 }
 
