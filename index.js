@@ -95,19 +95,22 @@ function setPossible(channel) {
   possible.setAttribute("transform",`rotate(${shift} 200,200)`);
 }
 
-function dateToTime(updated) {
-    const date = new Date(updated);
-    return date.toLocaleTimeString('pl-PL', { hour: "2-digit", minute: "2-digit" });
-    
-}
 function setUpdatedText(updated) {
-    const time = dateToTime(updated);
+    const now = Date.now()
+    const date = new Date(updated);
+    const diff = Math.floor((now - date) / (1000*60*60*24))
+    const time = date.toLocaleTimeString('pl-PL', { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
     const text = document.getElementById("updated");
-    text.textContent = `\u{27F3} ${time}`;
-    text.style.fill = "black";
+    if( diff < 1) {
+      text.textContent = `\u{27F3} ${time}`;
+      text.style.fill = "black";
+    } else {
+      text.textContent = `\u{27F3} ${time} \u{26A0}`;
+      text.style.fill = "orange";
+    }
 }
 
-function setArrow(channel, latest) {
+function setArrow(latest) {
     const arrow = document.getElementById("arrow");
     const direction = getDirection(latest);
     const speed = getSpeed(latest);
@@ -136,7 +139,7 @@ function setDirection(channel, latest) {
     const value = element.getElementsByClassName("value")[0];
     const indicator = element.getElementsByClassName("indicator")[0];
     const direction = getDirection(latest);
-    setArrow(channel, latest);
+    setArrow(latest);
     indicator.style.background = getDirectionColor(channel, direction);
     value.innerHTML = `${direction}\u{00B0}`;
 }
