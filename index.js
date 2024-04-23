@@ -138,7 +138,7 @@ function setDirection(channel, latest) {
     const direction = getDirection(latest);
     setArrow(channel, latest);
     indicator.style.background = getDirectionColor(channel, direction);
-    value.innerHTML = `${direction} \u{00B0}`;
+    value.innerHTML = `${direction}\u{00B0}`;
 }
 function setTemperature(latest) {
     const element = document.getElementById("temperature")
