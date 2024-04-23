@@ -203,7 +203,8 @@ var speedSpec = {
         axis: {
           title: 'Local Time',
           titleFontSize: 15,
-          labelFontSize: 18
+          labelFontSize: 18,
+          labelSeparation: 3
         }
       },
       y: {
@@ -212,8 +213,7 @@ var speedSpec = {
           format: ".1f",
           title: 'Avg. wind & Gust m/s',
           titleFontSize: 15,
-          labelFontSize: 18,
-          labelSeparation: 3
+          labelFontSize: 18
         }
       }
     }
