@@ -3,15 +3,15 @@
     <head>
       <meta charset="utf-8" />
       <link rel="stylesheet" href="index.css">
-      <title>Stacja pogodowa Skrzetla</title>
+      <title>Stacja pogodowa</title>
       <script src="https://cdn.jsdelivr.net/npm/vega@5.28.0"></script>
       <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.18.0"></script>
       <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.24.0"></script>
       <script src="index.js"></script>
       </head>
-<body onload="start(false);">
+<body onload="start(false);" onhashchange="start(true);">
 
-<h1>Skrzetla</h1>
+<h1 id="station-name"></h1>
 
 <div>
   <div class="windrose">
