@@ -208,12 +208,11 @@ var speedSpec = {
       },
       y: {
         axis: {
+          tickCount: 10,
           format: ".1f",
           title: 'Avg. wind & Gust m/s',
           titleFontSize: 15,
           labelFontSize: 18
-        },
-        scale: {
         }
       }
     }
@@ -237,6 +236,8 @@ var speedSpec = {
           domain: [0, 360],
         },
         axis: {
+          tickCount: 5,
+          values: [0,90,180,270,360],
           title: 'Wind Direction',
           titleFontSize: 15,
           labelFontSize: 18
