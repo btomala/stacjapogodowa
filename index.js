@@ -1,8 +1,22 @@
-const channel = 951169;
-const possible_from = 10;
-const possible_to = 70;
-const recommended_from = 30;
-const recommended_to = 50;
+const channels = {
+  "podobin": {
+    id: 2483830,
+    name: "Podobin",
+    possible_from: 175,
+    possible_to: 275,
+    recommended_from: 175,
+    recommended_to: 210
+  },
+  "skrzetla": {
+    id: 951169,
+    name: "Skrzętla",
+    possible_from: 10,
+    possible_to: 70,
+    recommended_from: 30,
+    recommended_to: 50
+  }
+}
+
 const circuit = 140 * 2 * 3.14
 
 let last_entry_id;
@@ -11,12 +25,15 @@ function start(enforced) {
     const speed = vegaEmbed('#speedChart', speedSpec, {actions: false})
     const direction = vegaEmbed('#directionChart', directionSpec, {actions: false});
     const temp = vegaEmbed('#tempChart', tempSpec, {actions: false});
-    setRecommended();
-    setPossible();
-    update(speed, direction, temp, 100, enforced);
+    const station_key = window.location.hash.substring(1) || "skrzetla";
+    const channel = channels[station_key];
+    setStationName(channel.name);
+    setRecommended(channel);
+    setPossible(channel);
+    update(channel, speed, direction, temp, 100, enforced);
 }
-function update(speed, direction, temp, n, enforced){
-    const data = fetchThingspeakData(channel, n);
+function update(channel, speed, direction, temp, n, enforced){
+    const data = fetchThingspeakData(channel.id, n);
     Promise.all([data, speed, direction, temp])
     .then((res) => {
         console.log(`${last_entry_id}:${res[0].channel.last_entry_id}`);
@@ -40,13 +57,14 @@ function update(speed, direction, temp, n, enforced){
         const latest = resp.feeds.find( f => f.entry_id == latestId)
         setWind(latest);
         setGust(latest);
-        setDirection(latest);
+        setDirection(channel, latest);
         setTemperature(latest);
         setUpdatedText(latest.created_at);
     }).catch( err => {
+        console.log(err)
         const text = document.getElementById("updated");
         text.style.fill = "red";
-    }).finally(() => setTimeout(() => update(speed, direction, temp, 1), 60*1000));
+    }).finally(() => setTimeout(() => update(channel, speed, direction, temp, 1), 60*1000));
 }
   
 async function fetchThingspeakData(id, n) {
@@ -55,18 +73,24 @@ async function fetchThingspeakData(id, n) {
     return data;
 }
 
-function setRecommended() {
+function setStationName(stationName) {
+  const stationNameElem = document.getElementById('station-name');
+  stationNameElem.innerText = stationName;
+  document.title = "Stacja pogodowa " + stationName;
+}
+
+function setRecommended(channel) {
     const recommended = document.getElementById("recommended")
-    const range = circuit * (recommended_to - recommended_from) / 360;
-    const shift = -90 + recommended_from;
+    const range = circuit * (channel.recommended_to - channel.recommended_from) / 360;
+    const shift = -90 + channel.recommended_from;
     recommended.setAttribute("stroke-dasharray",`${range} ${circuit}`)
     recommended.setAttribute("transform",`rotate(${shift} 200,200)`);
 }
 
-function setPossible() {
+function setPossible(channel) {
   const possible = document.getElementById("possible")
-  const range = circuit * (possible_to - possible_from) / 360;
-  const shift = -90 + possible_from;
+  const range = circuit * (channel.possible_to - channel.possible_from) / 360;
+  const shift = -90 + channel.possible_from;
   possible.setAttribute("stroke-dasharray",`${range} ${circuit}`)
   possible.setAttribute("transform",`rotate(${shift} 200,200)`);
 }
@@ -83,12 +107,12 @@ function setUpdatedText(updated) {
     text.style.fill = "black";
 }
 
-function setArrow(latest) {
+function setArrow(channel, latest) {
     const arrow = document.getElementById("arrow");
     const direction = getDirection(latest);
     const speed = getSpeed(latest);
     arrow.style.fill = getSpeedColor(speed);
-    arrow.style.stroke = getDirectionColor(direction);
+    arrow.style.stroke = getDirectionColor(channel, direction);
     arrow.setAttribute("transform", `rotate(${direction} 200,200)`);    
 }
 
@@ -108,12 +132,12 @@ function setGust(latest) {
     indicator.style.background = getSpeedColor(gust);
     value.innerHTML = `${gust} <span>m/s</span>`;
 }
-function setDirection(latest) {
+function setDirection(channel, latest) {
     const element = document.getElementById("direction")
     const value = element.getElementsByClassName("value")[0];
     const indicator = element.getElementsByClassName("indicator")[0];
     const direction = getDirection(latest);
-    setArrow(latest);
+    setArrow(channel, latest);
     indicator.style.background = getDirectionColor(direction);
     value.innerHTML = `${direction} \u{00B0}`;
 }
@@ -132,11 +156,11 @@ function getSpeedColor(speed) {
     else return "red";
 }
 
-function getDirectionColor(direction) {
-    if (direction < possible_from) return "black";
-    if (direction < recommended_from) return "yellow";
-    else if (direction < recommended_to) return "green";
-    else if (direction < possible_to) return "yellow";
+function getDirectionColor(channel, direction) {
+    if (direction < channel.possible_from) return "black";
+    if (direction < channel.recommended_from) return "yellow";
+    else if (direction < channel.recommended_to) return "green";
+    else if (direction < channel.possible_to) return "yellow";
     else return "black";
 }
 function getTemperatureColor(temp) {
