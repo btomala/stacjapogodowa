@@ -1,8 +1,8 @@
 :root {
     --size: 600px;
     font-family: Arial, Helvetica, sans-serif;
-    --small-font-size: min(calc(18px + 1vw), 25px);
-    --big-font-size: min(calc(36px + 1vw), 50px);
+    --small-font-size: calc(0.8em + 0.5vw);
+    --big-font-size: calc(2em + 0.5vw);
 }
 h1 {
     text-align: center;
@@ -48,6 +48,7 @@ h1 {
     color: white;
     font-size: var(--small-font-size);
     display: flex;
+    height: auto;
 }
 .boxes div {
     flex: 1;
@@ -59,6 +60,7 @@ h1 {
 .name {
     text-align: center;
     padding: 5px 0px;
+    height: auto;
 }
 .value {
     font-weight: bold;
@@ -81,6 +83,7 @@ h1 {
     }
 }
 .charts {
+    width: 100%;
     @media screen and (min-width: 1200px) {
         display: inline-block;
         width: calc( 100% - var(--size) - 10px);        
