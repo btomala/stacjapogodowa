@@ -199,7 +199,7 @@ var speedSpec = {
       x: {
         field: 'created_at',
         type: 'temporal',
-        timeUnit: 'dayshoursminutes',
+        timeUnit: 'hoursminutes',
         axis: {
           title: 'Local Time',
           titleFontSize: 15,
@@ -212,7 +212,8 @@ var speedSpec = {
           format: ".1f",
           title: 'Avg. wind & Gust m/s',
           titleFontSize: 15,
-          labelFontSize: 18
+          labelFontSize: 18,
+          labelSeparation: 3
         }
       }
     }
@@ -246,11 +247,12 @@ var speedSpec = {
       x: {
         field: 'created_at',
         type: 'temporal',
-        timeUnit: 'dayshoursminutes',
+        timeUnit: 'hoursminutes',
         axis: {
           title: 'Local Time',
           titleFontSize: 15,
-          labelFontSize: 18
+          labelFontSize: 18,
+          labelSeparation: 3
         }
       }
     }
@@ -279,11 +281,12 @@ var speedSpec = {
       x: {
         field: 'created_at',
         type: 'temporal',
-        timeUnit: 'dayshoursminutes',
+        timeUnit: 'hoursminutes',
         axis: {
           title: 'Local Time',
           titleFontSize: 15,
-          labelFontSize: 18
+          labelFontSize: 18,
+          labelSeparation: 3
         }
       }
     }    
