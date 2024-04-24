@@ -239,7 +239,7 @@ var speedSpec = {
         axis: {
           tickCount: 10,
           format: ".1f",
-          title: 'Avg&Gust m/s',
+          title: 'Wind speed m/s',
           titleFontSize: 15,
           labelFontSize: 18
         }
