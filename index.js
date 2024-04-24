@@ -152,10 +152,10 @@ function setTemperature(latest) {
     value.innerHTML = `${temp} <span>\u{2103}</span>`;
 }
 function getSpeedColor(speed) {
-    if (speed < 3) return "lightblue";
-    else if (speed < 6) return "green";
-    else if (speed < 10) return "yellow";
-    else return "red";
+    if (speed < 3) return "var(--wind-blue)";
+    else if (speed < 6) return "var(--wind-green)";
+    else if (speed < 10) return "var(--wind-yellow)";
+    else return "var(--wind-red)";
 }
 
 function getDirectionColor(channel, direction) {

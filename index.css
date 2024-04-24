@@ -3,6 +3,10 @@
     font-family: Arial, Helvetica, sans-serif;
     --small-font-size: calc(0.8em + 0.5vw);
     --big-font-size: calc(2em + 0.5vw);
+    --wind-green: #4ac64a;
+    --wind-yellow: #e2d02c;
+    --wind-red: #cb5151;
+    --wind-blue: #3f97e8;
 }
 h1 {
     text-align: center;
