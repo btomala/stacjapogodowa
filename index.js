@@ -227,7 +227,7 @@ var speedSpec = {
       x: {
         field: 'created_at',
         type: 'temporal',
-        timeUnit: 'hoursminutes',
+        timeUnit: 'dayshoursminutes',
         axis: {
           title: 'Local Time',
           titleFontSize: 15,
@@ -275,7 +275,7 @@ var speedSpec = {
       x: {
         field: 'created_at',
         type: 'temporal',
-        timeUnit: 'hoursminutes',
+        timeUnit: 'dayshoursminutes',
         axis: {
           title: 'Local Time',
           titleFontSize: 15,
@@ -309,7 +309,7 @@ var speedSpec = {
       x: {
         field: 'created_at',
         type: 'temporal',
-        timeUnit: 'hoursminutes',
+        timeUnit: 'dayshoursminutes',
         axis: {
           title: 'Local Time',
           titleFontSize: 15,
