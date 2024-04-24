@@ -75,7 +75,9 @@ async function fetchThingspeakData(id, n) {
 
 function setStationName(stationName) {
   const stationNameElem = document.getElementById('station-name');
-  stationNameElem.innerText = stationName;
+  if(stationNameElem) {
+    stationNameElem.innerText = stationName;
+  }
   document.title = "Stacja pogodowa " + stationName;
 }
 
@@ -187,7 +189,7 @@ function getDirection(feed) {
 var speedSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     width: "container",
-    height: 300,
+    height: chartHeight,
     autosize: { type: "fit", resize: true},
     data: {
       name: "fetched",
@@ -237,7 +239,7 @@ var speedSpec = {
         axis: {
           tickCount: 10,
           format: ".1f",
-          title: 'Avg. wind & Gust m/s',
+          title: 'Avg&Gust m/s',
           titleFontSize: 15,
           labelFontSize: 18
         }
@@ -248,7 +250,7 @@ var speedSpec = {
   var directionSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     width: "container",
-    height: 300,
+    height: chartHeight,
     autosize: { type: "fit", resize: true},
     data: {
       name: "fetched",
@@ -287,7 +289,7 @@ var speedSpec = {
   var tempSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     width: "container",
-    height: 300,
+    height: chartHeight,
     autosize: { type: "fit", resize: true},
     data: {
       name: "fetched",

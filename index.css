@@ -93,3 +93,12 @@ h1 {
         width: calc( 100% - var(--size) - 10px);        
     }
 }
+.windrose_widget {
+    vertical-align: top;
+    display: inline-block;
+    width: 300px;        
+}
+.charts_widget {
+    display: inline-block;
+    width: 600px;
+}

@@ -5,7 +5,7 @@
       <link rel="stylesheet" href="index.css">
       <title>Stacja pogodowa</title>
       <script>
-        const chartHeight = 300;
+        const chartHeight = 150;
       </script>
       <script src="https://cdn.jsdelivr.net/npm/vega@5.28.0"></script>
       <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.18.0"></script>
@@ -14,10 +14,8 @@
       </head>
 <body onload="start(false);" onhashchange="start(true);">
 
-<h1 id="station-name"></h1>
-
 <div>
-  <div class="windrose">
+  <div class="windrose_widget">
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" transform="scale(1)">
       <circle class="outer" stroke-dasharray="75 3.55" transform="rotate(1 200,200)"/>
       <circle id="greey" class="inner" stroke="lightgray" />
@@ -55,7 +53,7 @@
       </div>
     </div>
   </div>
-  <div class="charts">
+  <div class="charts_widget">
     <div class="chart" id="speedChart"></div>
     <div class="chart" id="directionChart"></div>
     <div class="chart" id="tempChart"></div>
