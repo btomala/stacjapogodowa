@@ -3,9 +3,9 @@ const channels = {
     id: 2483830,
     name: "Podobin",
     possible_from: 175,
-    possible_to: 275,
-    recommended_from: 175,
-    recommended_to: 210
+    possible_to: 250,
+    recommended_from: 180,
+    recommended_to: 230
   },
   "skrzetla": {
     id: 951169,
